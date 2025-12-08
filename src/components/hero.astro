@@ -1,0 +1,209 @@
+---
+// 🦸 HERO.ASTRO - Sección principal de bienvenida
+// Este componente es la primera sección que ven los usuarios
+---
+
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-content">
+      
+      <!-- 🏷️ BADGE SUPERIOR -->
+      <div class="hero-badge">
+        <span>UX/UI & DEV</span> <!-- 🔸 Cambia el texto del badge -->
+      </div>
+
+      <!-- 📝 TÍTULO PRINCIPAL -->
+      <h1 class="hero-title">
+        Creative Agency <!-- 🔸 Cambia el título principal aquí -->
+      </h1>
+
+      <!-- 📄 DESCRIPCIÓN -->
+      <p class="hero-description">
+        Fundamental Studio crafts exceptional digital experiences that transform brands<br>
+        and captivate audiences. We're the strategic partner that brings your vision to life.
+        <!-- 🔸 Cambia la descripción aquí. El <br> crea un salto de línea -->
+      </p>
+
+      <!-- 🎯 BOTÓN CTA -->
+      <a href="#contacto" class="hero-cta"> <!-- 🔸 Cambia el link del botón -->
+        Start a project <!-- 🔸 Cambia el texto del botón -->
+        <!-- Icono de flecha (no tocar) -->
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ============================================
+     📐 CONTENEDOR DEL HERO
+     ============================================ */
+  .hero {
+    width: 100%;
+    min-height: 70vh;                /* 🔸 Altura de la sección (70% de la pantalla) */
+    display: flex;
+    align-items: center;              /* Centra verticalmente */
+    justify-content: center;          /* Centra horizontalmente */
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-container {
+    max-width: var(--container-max-width, 1200px);  /* Usa el ancho global */
+    margin: 0 auto;
+    padding: 0 var(--container-padding, 2rem);
+    width: 100%;
+  }
+
+  .hero-content {
+    text-align: center;               /* Todo el contenido centrado */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;                        /* 🔸 Espacio entre elementos (badge, título, desc, botón) */
+  }
+
+  /* ============================================
+     🏷️ BADGE SUPERIOR
+     ============================================ */
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-badge span {
+    font-size: 0.875rem;              /* 🔸 Tamaño del texto del badge */
+    font-weight: 400;
+    letter-spacing: 0.15rem;          /* Espaciado entre letras */
+    color: #ffffff;                   /* 🔸 Color del badge */
+    text-transform: uppercase;        /* Convierte a MAYÚSCULAS */
+    opacity: 0.8;
+  }
+
+  /* ============================================
+     📝 TÍTULO PRINCIPAL
+     ============================================ */
+  .hero-title {
+    font-size: 7rem;                  /* 🔸 Tamaño GRANDE del título principal */
+    font-weight: 800;
+    line-height: 1;
+    color: #ffffff;                   /* 🔸 Color del título */
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-transform: capitalize;       /* Primera Letra En Mayúscula */
+  }
+
+  /* ============================================
+     📄 DESCRIPCIÓN
+     ============================================ */
+  .hero-description {
+    font-size: 1.125rem;              /* 🔸 Tamaño del texto de descripción */
+    font-weight: 300;
+    line-height: 1.8;
+    color: #a0a0a0;                   /* 🔸 Color del texto (gris claro) */
+    max-width: 700px;                 /* 🔸 Ancho máximo de la descripción */
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+
+  /* ============================================
+     🎯 BOTÓN CTA
+     ============================================ */
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;                     /* Espacio entre texto y flecha */
+    padding: 1rem 2rem;               /* 🔸 Tamaño interno del botón */
+    background-color: transparent;    /* Fondo transparente (solo borde) */
+    border: 1px solid #BDFC49;        /* 🔸 Color del borde del botón */
+    border-radius: 50px;              /* Bordes redondeados (cápsula) */
+    color: #BDFC49;                   /* 🔸 Color del texto del botón */
+    text-decoration: none;
+    font-size: 1rem;                  /* 🔸 Tamaño del texto del botón */
+    font-weight: 500;
+    letter-spacing: 0.05rem;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+  }
+
+  /* EFECTO HOVER DEL BOTÓN */
+  .hero-cta:hover {
+    background-color: #BDFC49;        /* 🔸 Fondo en hover (se rellena) */
+    color: #000000;                   /* 🔸 Texto cambia a negro en hover */
+    transform: translateY(-2px);      /* Sube ligeramente */
+    box-shadow: 0 8px 25px rgba(189, 252, 73, 0.3); /* Sombra */
+  }
+
+  /* ANIMACIÓN DE LA FLECHA */
+  .hero-cta svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  .hero-cta:hover svg {
+    transform: translateX(4px);       /* Mueve la flecha a la derecha en hover */
+  }
+
+  /* ============================================
+     📱 RESPONSIVE - Adaptación a móviles
+     ============================================ */
+  
+  /* TABLETS */
+  @media (max-width: 1024px) {
+    .hero-title {
+      font-size: 5.5rem;              /* Título más pequeño en tablets */
+    }
+
+    .hero-description {
+      font-size: 1rem;
+    }
+  }
+
+  /* MÓVILES */
+  @media (max-width: 768px) {
+    .hero {
+      min-height: 90vh;
+    }
+
+    .hero-content {
+      gap: 1.5rem;
+    }
+
+    .hero-badge span {
+      font-size: 0.75rem;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;              /* Título más pequeño en móviles */
+    }
+
+    .hero-description {
+      font-size: 0.95rem;
+      max-width: 100%;
+    }
+
+    .hero-description br {
+      display: none;                   /* Quita el salto de línea en móvil */
+    }
+
+    .hero-cta {
+      padding: 0.875rem 1.75rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  /* MÓVILES PEQUEÑOS */
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-description {
+      font-size: 0.9rem;
+    }
+  }
+</style>

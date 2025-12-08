@@ -1,0 +1,208 @@
+---
+// 🧭 NAV.ASTRO - Componente de navegación
+// Este es el menú principal que aparece en la parte superior de todas las páginas
+---
+
+<nav class="navbar">
+  <div class="nav-container">
+    <!-- 🏷️ LOGO - Lado izquierdo -->
+    <div class="logo">
+      <a href="/">
+        <span class="logo-text">Alain Ossandon</span> <!-- 🔸 Cambia tu nombre/marca aquí -->
+      </a>
+    </div>
+
+    <!-- 🔗 LINKS DE NAVEGACIÓN - Centro -->
+    <div class="nav-links">
+      <a href="#inicio" class="active">Inicio</a>        <!-- 🔸 Agrega class="active" al link actual -->
+      <a href="#proyectos">Proyectos</a>                 <!-- 🔸 Cambia los links según tus secciones -->
+      <a href="#contacto">Experiencia</a>
+      <!-- 💡 Puedes agregar más links copiando la línea de arriba -->
+    </div>
+
+    <!-- 🎯 BOTÓN CTA - Lado derecho -->
+    <div class="nav-cta">
+      <a href="#comenzar" class="cta-button">Comenzar Proyecto</a> <!-- 🔸 Cambia el texto del botón -->
+    </div>
+  </div>
+</nav>
+
+<style>
+  /* ============================================
+     📌 POSICIONAMIENTO DEL NAV
+     ============================================ */
+  .navbar {
+    position: fixed;                /* Mantiene el nav siempre visible arriba */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;                  /* Aparece por encima de todo */
+    padding: 1rem 2rem;
+  }
+
+  /* ============================================
+     🎨 CONTENEDOR PRINCIPAL DEL NAV
+     ============================================ */
+  .nav-container {
+    max-width: var(--container-max-width, 1200px);  /* Usa el ancho global del Layout */
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;                  /* Distribuye: Logo | Links | Botón */
+    
+    /* 🔸 FONDO DEL NAV - Cambia estos valores */
+    background: rgba(12, 22, 34, 0.8);              /* Color de fondo semi-transparente */
+    backdrop-filter: blur(10px);                     /* Efecto de desenfoque (glassmorphism) */
+    border-radius: 50px;                             /* Bordes redondeados (cápsula) */
+    padding: 0.8rem 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);      /* Sombra para efecto flotante */
+    border: 1px solid rgba(255, 255, 255, 0.05);    /* Borde sutil */
+  }
+
+  /* ============================================
+     🏷️ LOGO (Lado izquierdo)
+     ============================================ */
+  .logo a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-text {
+    font-size: 1.3rem;                               /* 🔸 Tamaño del logo/nombre */
+    font-weight: 600;
+    background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%); /* 🔸 Gradiente del texto */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.1rem;
+  }
+
+  /* ============================================
+     🔗 LINKS DE NAVEGACIÓN (Centro)
+     ============================================ */
+  .nav-links {
+    display: flex;
+    gap: 0.5rem;                                     /* 🔸 Espacio entre links */
+    align-items: center;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #ffffff;                                  /* 🔸 Color del texto de links */
+    font-weight: 300;
+    font-size: 0.9rem;                               /* 🔸 Tamaño de texto de links */
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.6rem 1.1rem;                          /* 🔸 Espacio interno de cada link */
+    border-radius: 50px;
+    z-index: 1;
+    letter-spacing: 0.08rem;
+  }
+
+  /* 💡 FONDO CIRCULAR EN HOVER */
+  .nav-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(189, 252, 73, 0.1);            /* 🔸 Color del fondo al pasar mouse */
+    border-radius: 50px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+    z-index: -1;
+  }
+
+  .nav-links a:hover::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .nav-links a:hover {
+    color: #BDFC49;                                  /* 🔸 Color del texto en hover */
+  }
+
+  /* ⭐ ESTADO ACTIVO (página actual) */
+  .nav-links a.active::before {
+    opacity: 1;
+    transform: scale(1);
+    background: #35374E;                             /* 🔸 Color del fondo del link activo */
+  }
+
+  .nav-links a.active {
+    color: #ffffff;                                  /* 🔸 Color del texto del link activo */
+    font-weight: 400;
+    letter-spacing: 0.08rem;
+  }
+
+  /* ============================================
+     🎯 BOTÓN CTA (Lado derecho)
+     ============================================ */
+  .nav-cta {
+    display: flex;
+    align-items: center;
+  }
+
+  .cta-button {
+    text-decoration: none;
+    background: linear-gradient(135deg, #BDFC49 0%, #c4fd5b 100%); /* 🔸 Color del botón */
+    color: #0C1622;                                  /* 🔸 Color del texto del botón */
+    padding: 0.65rem 1.5rem;                         /* 🔸 Tamaño del botón */
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    letter-spacing: 0.05rem;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);                     /* Sube al pasar el mouse */
+    box-shadow: 0 4px 20px rgba(189, 252, 73, 0.4); /* Sombra en hover */
+  }
+
+  /* ============================================
+     📱 RESPONSIVE - Adaptación a móviles
+     ============================================ */
+  @media (max-width: 1024px) {
+    .nav-container {
+      padding: 0.8rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 0.8rem 1rem;
+    }
+
+    /* En móvil, el nav se apila verticalmente */
+    .nav-container {
+      flex-direction: column;
+      gap: 0.8rem;
+      padding: 1.2rem 1.5rem;
+      border-radius: 30px;
+    }
+
+    .logo-text {
+      font-size: 1.1rem;
+    }
+
+    .nav-links {
+      gap: 0.3rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      padding: 0.5rem 1rem;
+    }
+
+    .cta-button {
+      padding: 0.6rem 1.3rem;
+      font-size: 0.85rem;
+    }
+  }
+</style>

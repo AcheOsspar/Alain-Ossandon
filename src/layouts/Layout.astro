@@ -1,22 +1,278 @@
+---
+import Nav from '../components/nav.astro';
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Alain Ossandon</title>
+        <!-- Google Fonts - Raleway -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <Nav />
+        <main class="main-container">
+            <slot />
+        </main>
+    </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+    /* ╔════════════════════════════════════════════════════════════════════╗
+       ║  📋 LAYOUT.ASTRO - CONFIGURACIÓN GLOBAL DEL SITIO                  ║
+       ║                                                                    ║
+       ║  Este archivo controla:                                            ║
+       ║  ✅ Colores globales de todo el sitio                             ║
+       ║  ✅ Ancho máximo del contenido                                    ║
+       ║  ✅ Estilos de tipografía (H1-H6, párrafos)                       ║
+       ║  ✅ Responsive de todos los elementos                             ║
+       ║                                                                    ║
+       ║  💡 IMPORTANTE: Los cambios aquí afectan TODO el sitio web        ║
+       ╚════════════════════════════════════════════════════════════════════╝ */
+
+    /* ============================================
+       🎨 CONFIGURACIÓN DE COLORES
+       
+       Aquí defines la paleta de colores de tu sitio.
+       Cambia los valores hexadecimales (#000000) según tu diseño.
+       ============================================ */
+    :root {
+        /* 🖼️ FONDOS */
+        --bg-body: #0C1622;              /* 🔹 Color del fondo principal del sitio */
+        --bg-secondary: #35374E;         /* 🔹 Color de fondos secundarios (cards, secciones) */
+        
+        /* ✍️ TEXTOS */
+        --text-primary: #ffffff;         /* 🔹 Color principal de texto (párrafos, body) */
+        --text-secondary: #a0a0a0;       /* 🔹 Color de textos secundarios (descripciones) */
+        --text-light: #707070;           /* 🔹 Color de textos sutiles (labels, hints) */
+        
+        /* 📝 TÍTULOS */
+        --heading-color: #ffffff;        /* 🔹 Color de todos los títulos (H1, H2, H3, etc.) */
+        
+        /* 🔗 ENLACES */
+        --link-color: #667eea;           /* 🔹 Color normal de enlaces */
+        --link-hover: #BDFC49;           /* 🔹 Color de enlaces al pasar el mouse (verde neón) */
+        
+        /* ⭐ ACENTOS/MARCA */
+        --accent-primary: #BDFC49;       /* 🔹 Color principal de tu marca (botones, highlights) */
+        --accent-secondary: #35374E;     /* 🔹 Color secundario de acento */
+        
+        /* 📐 BORDES */
+        --border-color: #35374E;         /* 🔹 Color de bordes y líneas divisoras */
+
+        /* ============================================
+           📏 CONFIGURACIÓN DE ANCHOS Y ESPACIADO
+           
+           Controla cuánto espacio horizontal usa el contenido.
+           Si se ve muy ancho o estrecho, cambia estos valores.
+           ============================================ */
+        --container-max-width: 1200px;   /* 🔸 Ancho máximo del contenido en pantallas grandes */
+        --container-padding: 2rem;       /* 🔸 Espaciado lateral (márgenes izq/der) */
+        
+        /* 💡 GUÍA DE ANCHOS:
+           ┌─────────────────────────────────────────────────┐
+           │ 1400px = Muy ancho (90% de la pantalla)         │
+           │ 1200px = Estándar (80%) ← RECOMENDADO           │
+           │ 1000px = Compacto (70%)                         │
+           │  800px = Muy compacto (60%)                     │
+           └─────────────────────────────────────────────────┘
+        */
+    }
+
+    /* ============================================
+       🔧 ESTILOS BASE
+       NO MODIFICAR - Configuración técnica básica
+       ============================================ */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth; /* Desplazamiento suave al hacer clic en anclas (#) */
+    }
+
+    body {
+        margin: 0;
+        width: 100%;
+        min-height: 100vh;
+        font-family: 'Raleway', sans-serif;
+        background-color: var(--bg-body);    /* 🎨 Usa la variable de fondo */
+        color: var(--text-primary);          /* 🎨 Usa la variable de texto */
+        overflow-x: hidden;
+    }
+
+    /* ============================================
+       📦 CONTENEDOR PRINCIPAL
+       
+       Controla el ancho máximo de TODO el contenido.
+       El nav y los componentes respetan este ancho.
+       ============================================ */
+    .main-container {
+        max-width: var(--container-max-width);  /* 📏 Usa el ancho definido arriba */
+        margin: 0 auto;                          /* Centra el contenido */
+        padding: 0 var(--container-padding);    /* Espaciado lateral */
+        padding-top: 120px;                      /* Espacio para que el nav no tape contenido */
+    }
+
+    /* ============================================
+       📝 TIPOGRAFÍA - Estilos de texto
+       
+       Define cómo se ven los títulos y párrafos.
+       Puedes cambiar tamaños (rem), pesos (weight) y espaciado.
+       ============================================ */
+    
+    /* TÍTULOS (H1, H2, H3, etc.) */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Raleway', sans-serif;
+        font-weight: 700;
+        line-height: 1.2;
+        color: var(--heading-color);        /* 🎨 Color de títulos */
+        letter-spacing: 0.05rem;
+    }
+
+    h1 {
+        font-size: 3.5rem;                   /* 🔸 Tamaño del H1 (default, no en Hero) */
+        font-weight: 800;
+        letter-spacing: 0.1rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;                   /* 🔸 Tamaño del H2 */
+        font-weight: 700;
+    }
+
+    h3 {
+        font-size: 2rem;                     /* 🔸 Tamaño del H3 */
+        font-weight: 600;
+    }
+
+    h4 {
+        font-size: 1.5rem;                   /* 🔸 Tamaño del H4 */
+        font-weight: 600;
+    }
+
+    h5 {
+        font-size: 1.25rem;                  /* 🔸 Tamaño del H5 */
+        font-weight: 500;
+    }
+
+    h6 {
+        font-size: 1rem;                     /* 🔸 Tamaño del H6 */
+        font-weight: 500;
+    }
+
+    /* PÁRRAFOS */
+    p {
+        font-family: 'Raleway', sans-serif;
+        font-size: 1rem;                     /* 🔸 Tamaño del texto normal */
+        font-weight: 300;
+        line-height: 1.8;                    /* Espaciado entre líneas */
+        color: var(--text-primary);         /* 🎨 Color del texto */
+        letter-spacing: 0.05rem;
+    }
+
+    /* ENLACES */
+    a {
+        font-family: 'Raleway', sans-serif;
+        color: var(--link-color);           /* 🎨 Color normal */
+        transition: color 0.3s ease;
+    }
+
+    a:hover {
+        color: var(--link-hover);           /* 🎨 Color al hacer hover */
+    }
+
+    /* FORMULARIOS */
+    button, input, textarea, select {
+        font-family: 'Raleway', sans-serif;
+    }
+
+    /* ============================================
+       🛠️ CLASES UTILIDADES
+       
+       Clases helper que puedes usar en tus componentes
+       para diferentes anchos de contenido.
+       
+       USO:
+       <div class="container">Contenido normal</div>
+       <div class="container-wide">Contenido ancho</div>
+       <div class="container-narrow">Contenido estrecho</div>
+       ============================================ */
+    .container {
+        max-width: var(--container-max-width);
+        margin: 0 auto;
+        padding: 0 var(--container-padding);
+    }
+
+    .container-wide {
+        max-width: 1400px;                   /* 🔸 Contenedor más ancho */
+        margin: 0 auto;
+        padding: 0 var(--container-padding);
+    }
+
+    .container-narrow {
+        max-width: 800px;                    /* 🔸 Contenedor más estrecho (ideal para blog) */
+        margin: 0 auto;
+        padding: 0 var(--container-padding);
+    }
+
+    /* ============================================
+       📱 RESPONSIVE - Adaptación a diferentes pantallas
+       
+       Aquí se ajustan automáticamente los tamaños
+       cuando la pantalla es más pequeña (tablets, móviles).
+       ============================================ */
+    
+    /* TABLETS (pantallas medianas) */
+    @media (max-width: 1024px) {
+        :root {
+            --container-padding: 1.5rem;     /* Reduce el padding lateral */
+        }
+    }
+
+    /* MÓVILES (pantallas pequeñas) */
+    @media (max-width: 768px) {
+        :root {
+            --container-padding: 1rem;       /* Padding aún más pequeño */
+        }
+
+        .main-container {
+            padding-top: 100px;              /* Reduce espacio del nav */
+        }
+
+        h1 {
+            font-size: 2.5rem;               /* H1 más pequeño en móvil */
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+    }
+
+    /* MÓVILES PEQUEÑOS */
+    @media (max-width: 480px) {
+        :root {
+            --container-padding: 1rem;
+        }
+
+        h1 {
+            font-size: 2rem;                 /* H1 aún más pequeño */
+        }
+
+        p {
+            font-size: 0.95rem;              /* Texto ligeramente más pequeño */
+        }
+    }
 </style>

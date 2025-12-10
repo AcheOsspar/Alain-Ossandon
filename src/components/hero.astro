@@ -3,23 +3,26 @@
 // Este componente es la primera sección que ven los usuarios
 ---
 
-<section class="hero">
-  <div class="hero-container">
+<!-- 🌐 Sección de ancho completo -->
+<section class="hero full-width">
+  <!-- 📦 Contenido limitado dentro -->
+  <div class="container">
     <div class="hero-content">
       
       <!-- 🏷️ BADGE SUPERIOR -->
       <div class="hero-badge">
-        <span>UX/UI - DEV - IA - MKT</span> <!-- 🔸 Cambia el texto del badge -->
+        <span>UX/UI & DEV</span> <!-- 🔸 Cambia el texto del badge -->
       </div>
 
       <!-- 📝 TÍTULO PRINCIPAL -->
       <h1 class="hero-title">
-        Product Designer <!-- 🔸 Cambia el título principal aquí -->
+        Creative Agency <!-- 🔸 Cambia el título principal aquí -->
       </h1>
 
       <!-- 📄 DESCRIPCIÓN -->
       <p class="hero-description">
-        10 años de experiencia. Con enfoque y habilidades para eliminar la fricción entre el diseño y el desarrollo en la usabilidad del producto.
+        Fundamental Studio crafts exceptional digital experiences that transform brands<br>
+        and captivate audiences. We're the strategic partner that brings your vision to life.
         <!-- 🔸 Cambia la descripción aquí. El <br> crea un salto de línea -->
       </p>
 
@@ -40,20 +43,12 @@
      📐 CONTENEDOR DEL HERO
      ============================================ */
   .hero {
-    width: 100%;
-    min-height: 70vh;                /* 🔸 Altura de la sección (70% de la pantalla) */
+    min-height: 100vh;                /* 🔸 Altura de la sección (100% de la pantalla) */
     display: flex;
     align-items: center;              /* Centra verticalmente */
     justify-content: center;          /* Centra horizontalmente */
     position: relative;
     overflow: hidden;
-  }
-
-  .hero-container {
-    max-width: var(--container-max-width, 1200px);  /* Usa el ancho global */
-    margin: 0 auto;
-    padding: 0 var(--container-padding, 2rem);
-    width: 100%;
   }
 
   .hero-content {

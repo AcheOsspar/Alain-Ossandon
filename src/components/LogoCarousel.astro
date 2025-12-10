@@ -1,0 +1,254 @@
+---
+// 🎡 LOGOCAROUSEL.ASTRO - Carrusel infinito de logos
+// Muestra las herramientas/tecnologías que dominas en loop horizontal
+---
+
+<!-- 🌐 SECCIÓN DE ANCHO COMPLETO -->
+<section class="logo-carousel full-width">
+  
+  <!-- 📝 TÍTULO OPCIONAL - Este SÍ puede estar limitado -->
+  <div class="container carousel-header">
+    <p class="carousel-label">Tecnologías & Herramientas</p> <!-- 🔸 Cambia el título -->
+  </div>
+
+  <!-- 🎠 CARRUSEL INFINITO - ANCHO COMPLETO sin container -->
+  <div class="carousel-track-container">
+    <div class="carousel-track">
+      
+      <!-- 🔸 PRIMER SET DE LOGOS -->
+      <div class="logo-item">
+        <span>React</span>
+      </div>
+      <div class="logo-item">
+        <span>Next.js</span>
+      </div>
+      <div class="logo-item">
+        <span>Astro</span>
+      </div>
+      <div class="logo-item">
+        <span>TypeScript</span>
+      </div>
+      <div class="logo-item">
+        <span>Tailwind CSS</span>
+      </div>
+      <div class="logo-item">
+        <span>Node.js</span>
+      </div>
+      <div class="logo-item">
+        <span>Figma</span>
+      </div>
+      <div class="logo-item">
+        <span>Adobe XD</span>
+      </div>
+
+      <!-- 🔄 SEGUNDO SET (DUPLICADO para loop infinito - NO MODIFICAR) -->
+      <div class="logo-item" aria-hidden="true">
+        <span>React</span>
+      </div>
+      <div class="logo-item" aria-hidden="true">
+        <span>Next.js</span>
+      </div>
+      <div class="logo-item" aria-hidden="true">
+        <span>Astro</span>
+      </div>
+      <div class="logo-item" aria-hidden="true">
+        <span>TypeScript</span>
+      </div>
+      <div class="logo-item" aria-hidden="true">
+        <span>Tailwind CSS</span>
+      </div>
+      <div class="logo-item" aria-hidden="true">
+        <span>Node.js</span>
+      </div>
+      <div class="logo-item" aria-hidden="true">
+        <span>Figma</span>
+      </div>
+      <div class="logo-item" aria-hidden="true">
+        <span>Adobe XD</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ============================================
+     📐 CONTENEDOR PRINCIPAL - ANCHO COMPLETO
+     ============================================ */
+  .logo-carousel {
+    width: 100%;                      /* 🔹 Ocupa TODO el ancho de la pantalla */
+    padding: 4rem 0;                  /* 🔸 Espaciado vertical de la sección */
+    overflow: hidden;                 /* Oculta logos que salen de la pantalla HORIZONTALMENTE */
+    background-color: transparent;    /* Usa el fondo del Layout */
+  }
+
+  /* ============================================
+     📝 HEADER DEL CARRUSEL (opcional)
+     Este SÍ está limitado por .container en el HTML
+     ============================================ */
+  .carousel-header {
+    text-align: center;
+    margin-bottom: 3rem;              /* 🔸 Espacio entre título y carrusel */
+  }
+
+  .carousel-label {
+    font-size: 0.875rem;              /* 🔸 Tamaño del texto del label */
+    font-weight: 400;
+    letter-spacing: 0.15rem;
+    color: #a0a0a0;                   /* 🔸 Color del label */
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  /* ============================================
+     🎠 CARRUSEL INFINITO - SIN LÍMITES DE ANCHO
+     ============================================ */
+  .carousel-track-container {
+    width: 100%;                      /* 🔹 Ancho completo de la pantalla */
+    overflow-x: hidden;               /* ✅ Solo oculta overflow HORIZONTAL */
+    overflow-y: visible;              /* ✅ Permite que sombras/elevación se vean */
+    position: relative;
+    padding: 2rem 0;                  /* ✅ Espacio arriba y abajo para efectos hover */
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 3rem;                        /* 🔸 Espacio entre logos */
+    animation: scroll 30s linear infinite; /* 🔸 Velocidad: cambia "30s" (más = más lento) */
+    width: max-content;               /* Se adapta al contenido (permite overflow) */
+  }
+
+  /* ⏸️ PAUSA AL HACER HOVER */
+  .carousel-track:hover {
+    animation-play-state: paused;     /* Detiene el carrusel al pasar el mouse */
+  }
+
+  /* ============================================
+     🏷️ LOGOS INDIVIDUALES
+     ============================================ */
+  .logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px;                 /* 🔸 Ancho mínimo de cada logo */
+    height: 80px;                     /* 🔸 Altura de cada logo */
+    padding: 1.5rem 2rem;
+    
+    /* 🎨 ESTILO DEL CONTENEDOR */
+    background: rgba(53, 55, 78, 0.3); /* 🔸 Fondo semi-transparente */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* 🔸 Borde sutil */
+    border-radius: 16px;              /* 🔸 Bordes redondeados */
+    backdrop-filter: blur(10px);      /* Efecto glassmorphism */
+    
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;               /* ✅ Para que z-index funcione */
+    z-index: 1;                       /* ✅ Base z-index */
+  }
+
+  /* EFECTO HOVER EN LOGOS */
+  .logo-item:hover {
+    background: rgba(189, 252, 73, 0.1); /* 🔸 Fondo en hover */
+    border-color: rgba(189, 252, 73, 0.3); /* 🔸 Borde en hover */
+    transform: translateY(-8px);      /* 🔸 Sube más para efecto dramático */
+    box-shadow: 0 12px 35px rgba(189, 252, 73, 0.3); /* 🔸 Sombra más grande */
+    z-index: 10;                      /* ✅ Asegura que esté por encima */
+  }
+
+  /* TEXTO DEL LOGO */
+  .logo-item span {
+    font-size: 1rem;                  /* 🔸 Tamaño del texto */
+    font-weight: 500;
+    color: #ffffff;                   /* 🔸 Color del texto */
+    letter-spacing: 0.05rem;
+    white-space: nowrap;              /* Evita que el texto se rompa */
+  }
+
+  .logo-item:hover span {
+    color: #BDFC49;                   /* 🔸 Color del texto en hover */
+  }
+
+  /* ============================================
+     🎬 ANIMACIÓN DE SCROLL INFINITO
+     ============================================ */
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);    /* Mueve exactamente la mitad (por eso duplicamos) */
+    }
+  }
+
+  /* ============================================
+     📱 RESPONSIVE
+     ============================================ */
+  @media (max-width: 768px) {
+    .logo-carousel {
+      padding: 3rem 0;
+    }
+
+    .carousel-header {
+      margin-bottom: 2rem;
+    }
+
+    .carousel-label {
+      font-size: 0.75rem;
+    }
+
+    .carousel-track-container {
+      padding: 1.5rem 0;              /* Menos padding en móvil */
+    }
+
+    .carousel-track {
+      gap: 2rem;                      /* Menos espacio en móvil */
+      animation: scroll 20s linear infinite; /* 🔸 Más rápido en móvil */
+    }
+
+    .logo-item {
+      min-width: 140px;               /* Logos más pequeños en móvil */
+      height: 60px;
+      padding: 1rem 1.5rem;
+    }
+
+    .logo-item:hover {
+      transform: translateY(-6px);    /* Menos elevación en móvil */
+      box-shadow: 0 8px 25px rgba(189, 252, 73, 0.3);
+    }
+
+    .logo-item span {
+      font-size: 0.875rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .carousel-track-container {
+      padding: 1rem 0;
+    }
+
+    .carousel-track {
+      gap: 1.5rem;
+    }
+
+    .logo-item {
+      min-width: 120px;
+      height: 50px;
+      padding: 0.75rem 1rem;
+    }
+
+    .logo-item:hover {
+      transform: translateY(-4px);
+    }
+
+    .logo-item span {
+      font-size: 0.8rem;
+    }
+  }
+</style>
+
+<style is:global>
+  /* 💡 MEJORA DE RENDIMIENTO - Suaviza la animación */
+  .carousel-track {
+    will-change: transform;
+  }
+</style>

@@ -17,9 +17,9 @@ import Nav from '../components/nav.astro';
     </head>
     <body>
         <Nav />
-        <main class="main-container">
-            <slot />
-        </main>
+        <!-- 🔸 SLOT SIN RESTRICCIÓN DE ANCHO -->
+        <!-- Ahora cada componente controla su propio ancho -->
+        <slot />
     </body>
 </html>
 
@@ -83,6 +83,9 @@ import Nav from '../components/nav.astro';
            │  800px = Muy compacto (60%)                     │
            └─────────────────────────────────────────────────┘
         */
+
+        /* 📐 ESPACIADO DEL NAV */
+        --nav-height: 120px;             /* 🔸 Altura del espacio para el nav fijo */
     }
 
     /* ============================================
@@ -107,19 +110,49 @@ import Nav from '../components/nav.astro';
         background-color: var(--bg-body);    /* 🎨 Usa la variable de fondo */
         color: var(--text-primary);          /* 🎨 Usa la variable de texto */
         overflow-x: hidden;
+        padding-top: var(--nav-height);      /* Espacio para el nav fijo */
     }
 
     /* ============================================
-       📦 CONTENEDOR PRINCIPAL
+       📦 CLASES CONTENEDORAS
        
-       Controla el ancho máximo de TODO el contenido.
-       El nav y los componentes respetan este ancho.
+       Usa estas clases en componentes que necesiten
+       limitar su ancho (como texto, cards, etc.)
+       
+       USO:
+       <section class="full-width">        ← Ancho completo (Hero, Carrusel)
+         <div class="container">           ← Contenido limitado dentro
+           <h1>Título</h1>
+         </div>
+       </section>
        ============================================ */
-    .main-container {
-        max-width: var(--container-max-width);  /* 📏 Usa el ancho definido arriba */
-        margin: 0 auto;                          /* Centra el contenido */
-        padding: 0 var(--container-padding);    /* Espaciado lateral */
-        padding-top: 120px;                      /* Espacio para que el nav no tape contenido */
+    
+    /* 🌐 ANCHO COMPLETO - Para secciones que ocupan toda la pantalla */
+    .full-width {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* 📦 CONTENEDOR ESTÁNDAR - Limita el ancho del contenido */
+    .container {
+        max-width: var(--container-max-width);
+        margin: 0 auto;
+        padding: 0 var(--container-padding);
+    }
+
+    /* 📦 CONTENEDOR ANCHO - Más espacio */
+    .container-wide {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 var(--container-padding);
+    }
+
+    /* 📦 CONTENEDOR ESTRECHO - Para contenido tipo blog */
+    .container-narrow {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 var(--container-padding);
     }
 
     /* ============================================
@@ -196,35 +229,6 @@ import Nav from '../components/nav.astro';
     }
 
     /* ============================================
-       🛠️ CLASES UTILIDADES
-       
-       Clases helper que puedes usar en tus componentes
-       para diferentes anchos de contenido.
-       
-       USO:
-       <div class="container">Contenido normal</div>
-       <div class="container-wide">Contenido ancho</div>
-       <div class="container-narrow">Contenido estrecho</div>
-       ============================================ */
-    .container {
-        max-width: var(--container-max-width);
-        margin: 0 auto;
-        padding: 0 var(--container-padding);
-    }
-
-    .container-wide {
-        max-width: 1400px;                   /* 🔸 Contenedor más ancho */
-        margin: 0 auto;
-        padding: 0 var(--container-padding);
-    }
-
-    .container-narrow {
-        max-width: 800px;                    /* 🔸 Contenedor más estrecho (ideal para blog) */
-        margin: 0 auto;
-        padding: 0 var(--container-padding);
-    }
-
-    /* ============================================
        📱 RESPONSIVE - Adaptación a diferentes pantallas
        
        Aquí se ajustan automáticamente los tamaños
@@ -235,6 +239,7 @@ import Nav from '../components/nav.astro';
     @media (max-width: 1024px) {
         :root {
             --container-padding: 1.5rem;     /* Reduce el padding lateral */
+            --nav-height: 100px;
         }
     }
 
@@ -242,10 +247,7 @@ import Nav from '../components/nav.astro';
     @media (max-width: 768px) {
         :root {
             --container-padding: 1rem;       /* Padding aún más pequeño */
-        }
-
-        .main-container {
-            padding-top: 100px;              /* Reduce espacio del nav */
+            --nav-height: 100px;
         }
 
         h1 {
